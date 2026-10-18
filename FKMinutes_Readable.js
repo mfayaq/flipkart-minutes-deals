@@ -5,134 +5,597 @@ javascript:(function(){
     if (el) el.remove();
   });
 
-  var THEME = "#2563eb";
-  var THEME_DARK = "#1d4ed8";
   var d = document;
 
-  /* Flipkart Minutes Verified Category Catalog (Direct Flat List) */
-  var CATEGORIES = [
-    { name: "🍎 Fresh Fruits", uri: "/hyperlocal/Fruits/pr?sid=hloc%2F0071&marketplace=HYPERLOCAL", catId: "hloc/0071" },
-    { name: "🥕 Fresh Vegetables", uri: "/hyperlocal/Vegetables/pr?sid=hloc%2F0072&marketplace=HYPERLOCAL", catId: "hloc/0072" },
-    { name: "🌾 Atta, Rice & Dal", uri: "/hyperlocal/Atta-Rice-Dal/pr?sid=hloc%2F0003&marketplace=HYPERLOCAL", catId: "hloc/0003" },
-    { name: "🍳 Oil, Ghee & Masalas", uri: "/hyperlocal/Oil-Ghee-Masala/pr?sid=hloc%2F0009&marketplace=HYPERLOCAL", catId: "hloc/0009" },
-    { name: "🥛 Dairy, Bread & Eggs", uri: "/hyperlocal/hloc/3002/pr?sid=hloc%2F0030%2F3002&marketplace=HYPERLOCAL", catId: "hloc/0030" },
-    { name: "🍗 Chicken, Meat & Fish", uri: "/hyperlocal/Chicken-Meat-Fish/pr?sid=hloc%2F0031&marketplace=HYPERLOCAL", catId: "hloc/0031" },
-    { name: "🍟 Chips, Crisps & Namkeen", uri: "/hyperlocal/Chips-Namkeen/pr?sid=hloc%2F0010&marketplace=HYPERLOCAL", catId: "hloc/0010" },
-    { name: "🥤 Cold Drinks & Juices", uri: "/hyperlocal/ColdDrinks-Juices/pr?sid=hloc%2F0007&marketplace=HYPERLOCAL", catId: "hloc/0007" },
-    { name: "🍪 Bakery & Biscuits", uri: "/hyperlocal/Bakery-Biscuits/pr?sid=hloc%2F0006&marketplace=HYPERLOCAL", catId: "hloc/0006" },
-    { name: "☕ Tea, Coffee & Milk Drinks", uri: "/hyperlocal/Tea-Coffee-Milk-Drinks/pr?sid=hloc%2F0011&marketplace=HYPERLOCAL", catId: "hloc/0011" },
-    { name: "🥣 Cereals & Dry Fruits", uri: "/hyperlocal/Cereals-DryFruits/pr?sid=hloc%2F0019&marketplace=HYPERLOCAL", catId: "hloc/0019" },
-    { name: "🍝 Instant & Frozen Food", uri: "/hyperlocal/Instant-FrozenFood/pr?sid=hloc%2F0020&marketplace=HYPERLOCAL", catId: "hloc/0020" },
-    { name: "🥫 Sauces & Spreads", uri: "/hyperlocal/Sauces-Spreads/pr?sid=hloc%2F0021&marketplace=HYPERLOCAL", catId: "hloc/0021" },
-    { name: "🍫 Chocolates & Candies", uri: "/hyperlocal/hloc/6501/pr?sid=hloc%2F0065%2F6501&marketplace=HYPERLOCAL", catId: "hloc/0065" },
-    { name: "🍨 Ice Cream & Desserts", uri: "/hyperlocal/IceCream-Desserts/pr?sid=hloc%2F0034&marketplace=HYPERLOCAL", catId: "hloc/0034" },
-    { name: "🍬 Sweets & Mithai", uri: "/hyperlocal/hloc/0806/pr?sid=hloc%2F0081%2F0806&marketplace=HYPERLOCAL", catId: "hloc/0081/0806" },
-    { name: "🌿 Paan Corner & Refreshments", uri: "/hyperlocal/hloc/4904/pr?sid=hloc%2F0049%2F4904&marketplace=HYPERLOCAL", catId: "hloc/0049/4904" },
-    { name: "🧼 Bath & Grooming / Soaps", uri: "/hyperlocal/Bath-Grooming/pr?sid=hloc%2F0013&marketplace=HYPERLOCAL", catId: "hloc/0013" },
-    { name: "💇 Hair Care & Shampoos", uri: "/hyperlocal/Hair-Care/pr?sid=hloc%2F0044&marketplace=HYPERLOCAL", catId: "hloc/0044" },
-    { name: "💄 Beauty & Fragrances", uri: "/hyperlocal/Beauty-Fragrances/pr?sid=hloc%2F0041&marketplace=HYPERLOCAL", catId: "hloc/0041" },
-    { name: "👶 Baby Care & Diapers", uri: "/hyperlocal/Baby-Care/pr?sid=hloc%2F0001%2F0110&marketplace=HYPERLOCAL", catId: "hloc/0001" },
-    { name: "💊 Health & Pharma", uri: "/hyperlocal/Health-Pharma/pr?sid=hloc%2F0015&marketplace=HYPERLOCAL", catId: "hloc/0015" },
-    { name: "🌸 Feminine Hygiene", uri: "/hyperlocal/hloc/qbq2/pr?sid=hloc%2Fqbq2&marketplace=HYPERLOCAL", catId: "hloc/qbq2" },
-    { name: "🛡️ Sexual Wellness", uri: "/hyperlocal/hloc/zgt0/pr?sid=hloc%2Fzgt0&marketplace=HYPERLOCAL", catId: "hloc/zgt0" },
-    { name: "🧹 Cleaning Essentials & Detergents", uri: "/hyperlocal/Cleaning-Essentials/pr?sid=hloc%2F0025&marketplace=HYPERLOCAL", catId: "hloc/0025" },
-    { name: "🍳 Kitchen & Dining Essentials", uri: "/hyperlocal/Kitchen/pr?sid=hloc%2F0048&marketplace=HYPERLOCAL", catId: "hloc/0048" },
-    { name: "🛏️ Home Furnishing & Bedding", uri: "/hyperlocal/hloc/4701/pr?sid=hloc%2F0047%2F4701&marketplace=HYPERLOCAL", catId: "hloc/0047" },
-    { name: "📚 School Supplies & Stationery", uri: "/hyperlocal/School-Supplies/pr?sid=hloc%2F0016&marketplace=HYPERLOCAL", catId: "hloc/0016" },
-    { name: "🪛 Electricals & Tools", uri: "/hyperlocal/Electircals-Tools/pr?sid=hloc%2F0043&marketplace=HYPERLOCAL", catId: "hloc/0043" },
-    { name: "🪔 Pooja Needs & Agarbatti", uri: "/hyperlocal/hloc/8201/pr?sid=hloc%2F0082%2F8201&marketplace=HYPERLOCAL", catId: "hloc/0082" },
-    { name: "🐕 Pet Care & Pet Food", uri: "/hyperlocal/PetCare/pr?sid=hloc%2F0029&marketplace=HYPERLOCAL", catId: "hloc/0029" },
-    { name: "🧸 Toys & Games", uri: "/hyperlocal/Toys-Games/pr?sid=hloc%2F0028&marketplace=HYPERLOCAL", catId: "hloc/0028" },
-    { name: "🏸 Sports & Fitness", uri: "/hyperlocal/Sports-Fitness/pr?sid=hloc%2F0036&marketplace=HYPERLOCAL", catId: "hloc/0036" },
-    { name: "👜 Fashion Accessories", uri: "/hyperlocal/Fashion-Accessories/pr?sid=hloc%2F0026&marketplace=HYPERLOCAL", catId: "hloc/0026" },
-    { name: "📱 Mobiles & Accessories", uri: "/hyperlocal/Mobiles/pr?sid=hloc%2F0002&marketplace=HYPERLOCAL", catId: "hloc/0002" },
-    { name: "🎧 Speakers & Earphones", uri: "/hyperlocal/Speakers-Earphone/pr?sid=hloc%2F0039&marketplace=HYPERLOCAL", catId: "hloc/0039" },
-    { name: "🔌 Electronics & Gadgets", uri: "/hyperlocal/Electronics%20and%20Gadgets/pr?sid=hloc%2F0038&marketplace=HYPERLOCAL", catId: "hloc/0038" },
-    { name: "🔌 Home Appliances", uri: "/hyperlocal/hloc/4002/pr?sid=hloc%2F0040%2F4002&marketplace=HYPERLOCAL", catId: "hloc/0040/4002" }
-  ];
-
-  /* Pre-mapped verified subcategories for instant reliable looping */
-  var PRESET_SUBCATS = {
-    "hloc/0006": [
-      { title: "Biscuits & Cookies", url: "/hyperlocal/hloc/0613/pr?sid=hloc%2F0006%2F0613&marketplace=HYPERLOCAL" },
-      { title: "Breads & Buns", url: "/hyperlocal/hloc/0601/pr?sid=hloc%2F0006%2F0601&marketplace=HYPERLOCAL" },
-      { title: "Rusk & Khari", url: "/hyperlocal/hloc/0603/pr?sid=hloc%2F0006%2F0603&marketplace=HYPERLOCAL" },
-      { title: "Cakes & Muffins", url: "/hyperlocal/hloc/0604/pr?sid=hloc%2F0006%2F0604&marketplace=HYPERLOCAL" },
-      { title: "Bakery Snacks", url: "/hyperlocal/hloc/0602/pr?sid=hloc%2F0006%2F0602&marketplace=HYPERLOCAL" }
-    ],
-    "hloc/0010": [
-      { title: "Chips", url: "/hyperlocal/hloc/1001/pr?sid=hloc%2F0010%2F1001&marketplace=HYPERLOCAL" },
-      { title: "Bhujia & Mixture", url: "/hyperlocal/hloc/bbvr/pr?sid=hloc%2F0010%2Fbbvr&marketplace=HYPERLOCAL" },
-      { title: "Wafers", url: "/hyperlocal/hloc/sotw/pr?sid=hloc%2F0010%2Fsotw&marketplace=HYPERLOCAL" },
-      { title: "Namkeens", url: "/hyperlocal/hloc/1002/pr?sid=hloc%2F0010%2F1002&marketplace=HYPERLOCAL" },
-      { title: "Indian snacks", url: "/hyperlocal/hloc/qeby/pr?sid=hloc%2F0010%2Fqeby&marketplace=HYPERLOCAL" },
-      { title: "Roasted Nuts", url: "/hyperlocal/hloc/1004/pr?sid=hloc%2F0010%2F1004&marketplace=HYPERLOCAL" },
-      { title: "Nachos", url: "/hyperlocal/hloc/1003/pr?sid=hloc%2F0010%2F1003&marketplace=HYPERLOCAL" },
-      { title: "Healthy Snacks", url: "/hyperlocal/hloc/rzhh/pr?sid=hloc%2F0010%2Frzhh&marketplace=HYPERLOCAL" },
-      { title: "Popcorn", url: "/hyperlocal/hloc/1005/pr?sid=hloc%2F0010%2F1005&marketplace=HYPERLOCAL" },
-      { title: "Papads & Fryums", url: "/hyperlocal/hloc/1006/pr?sid=hloc%2F0010%2F1006&marketplace=HYPERLOCAL" },
-      { title: "Premium & Gourmet", url: "/hyperlocal/hloc/nokv/pr?sid=hloc%2F0010%2Fnokv&marketplace=HYPERLOCAL" }
-    ],
-    "hloc/0065": [
-      { title: "Chocolates", url: "/hyperlocal/hloc/6501/pr?sid=hloc%2F0065%2F6501&marketplace=HYPERLOCAL" },
-      { title: "Chocolate Packs", url: "/hyperlocal/hloc/gwcg/pr?sid=hloc%2F0065%2Fgwcg&marketplace=HYPERLOCAL" },
-      { title: "Protein & Energy Bars", url: "/hyperlocal/hloc/6505/pr?sid=hloc%2F0065%2F6505&marketplace=HYPERLOCAL" },
-      { title: "Wafers and Waffle", url: "/hyperlocal/hloc/6504/pr?sid=hloc%2F0065%2F6504&marketplace=HYPERLOCAL" },
-      { title: "Candies & Lollipops", url: "/hyperlocal/hloc/6502/pr?sid=hloc%2F0065%2F6502&marketplace=HYPERLOCAL" },
-      { title: "Mouth Freshener & Gum", url: "/hyperlocal/hloc/6503/pr?sid=hloc%2F0065%2F6503&marketplace=HYPERLOCAL" },
-      { title: "Dark Chocolate", url: "/hyperlocal/hloc/tczo/pr?sid=hloc%2F0065%2Ftczo&marketplace=HYPERLOCAL" },
-      { title: "Milk chocolate", url: "/hyperlocal/hloc/rzod/pr?sid=hloc%2F0065%2Frzod&marketplace=HYPERLOCAL" },
-      { title: "Syrups & Spreads", url: "/hyperlocal/hloc/ayvh/pr?sid=hloc%2F0065%2Fayvh&marketplace=HYPERLOCAL" },
-      { title: "Shared Packs", url: "/hyperlocal/hloc/evew/pr?sid=hloc%2F0065%2Fevew&marketplace=HYPERLOCAL" },
-      { title: "Fruit & Nut Chocolates", url: "/hyperlocal/hloc/skjg/pr?sid=hloc%2F0065%2Fskjg&marketplace=HYPERLOCAL" },
-      { title: "Brownies & Muffins", url: "/hyperlocal/hloc/flxv/pr?sid=hloc%2F0065%2Fflxv&marketplace=HYPERLOCAL" },
-      { title: "Premium & Imported", url: "/hyperlocal/hloc/ztyr/pr?sid=hloc%2F0065%2Fztyr&marketplace=HYPERLOCAL" }
-    ],
-    "hloc/0011": [
-      { title: "Tea", url: "/hyperlocal/hloc/1101/pr?sid=hloc%2F0011%2F1101&marketplace=HYPERLOCAL" },
-      { title: "Coffee", url: "/hyperlocal/hloc/1102/pr?sid=hloc%2F0011%2F1102&marketplace=HYPERLOCAL" },
-      { title: "Health & Nutrition Drinks", url: "/hyperlocal/hloc/1103/pr?sid=hloc%2F0011%2F1103&marketplace=HYPERLOCAL" },
-      { title: "Green & Herbal Tea", url: "/hyperlocal/hloc/1104/pr?sid=hloc%2F0011%2F1104&marketplace=HYPERLOCAL" }
-    ],
-    "hloc/0003": [
-      { title: "Atta & Flours", url: "/hyperlocal/hloc/0301/pr?sid=hloc%2F0003%2F0301&marketplace=HYPERLOCAL" },
-      { title: "Rice & Rice Products", url: "/hyperlocal/hloc/0302/pr?sid=hloc%2F0003%2F0302&marketplace=HYPERLOCAL" },
-      { title: "Dals & Pulses", url: "/hyperlocal/hloc/0303/pr?sid=hloc%2F0003%2F0303&marketplace=HYPERLOCAL" }
-    ],
-    "hloc/0007": [
-      { title: "Soft Drinks & Soda", url: "/hyperlocal/hloc/0701/pr?sid=hloc%2F0007%2F0701&marketplace=HYPERLOCAL" },
-      { title: "Fruit Juices", url: "/hyperlocal/hloc/0702/pr?sid=hloc%2F0007%2F0702&marketplace=HYPERLOCAL" },
-      { title: "Energy & Sports Drinks", url: "/hyperlocal/hloc/0703/pr?sid=hloc%2F0007%2F0703&marketplace=HYPERLOCAL" }
-    ],
-    "hloc/0009": [
-      { title: "Edible Oils", url: "/hyperlocal/hloc/0901/pr?sid=hloc%2F0009%2F0901&marketplace=HYPERLOCAL" },
-      { title: "Ghee & Vanaspati", url: "/hyperlocal/hloc/0902/pr?sid=hloc%2F0009%2F0902&marketplace=HYPERLOCAL" },
-      { title: "Spices & Masalas", url: "/hyperlocal/hloc/0903/pr?sid=hloc%2F0009%2F0903&marketplace=HYPERLOCAL" }
+  /* Verified Category Catalog (Direct Solr Facets Collapsible Tree) */
+  var CATEGORY_TREE = [
+  {
+    "id": "master_all",
+    "name": "🔥 Scan All Categories (Top Deals)",
+    "isMaster": true,
+    "uri": ""
+  },
+  {
+    "id": "grp_Staples",
+    "group": "Staples",
+    "name": "🌾 Staples",
+    "allLabel": "Staples (All)",
+    "isGroup": true,
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/bpe",
+    "subs": [
+      {
+        "id": "sub_73z_bpe_3uv_",
+        "name": "Dal & Pulses",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/bpe&p[]=facets.category[]=73z/bpe/3uv/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_bpe_4wu_",
+        "name": "Ghee and Oils",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/bpe&p[]=facets.category[]=73z/bpe/4wu/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_bpe_9da_",
+        "name": "Atta and Flours",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/bpe&p[]=facets.category[]=73z/bpe/9da/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_bpe_a6m_",
+        "name": "Masala and Spices",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/bpe&p[]=facets.category[]=73z/bpe/a6m/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_bpe_zwp_",
+        "name": "Rice and Rice Products",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/bpe&p[]=facets.category[]=73z/bpe/zwp/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_bpe_dtp_",
+        "name": "Dry Fruits, Nuts & Seeds",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/bpe&p[]=facets.category[]=73z/bpe/dtp/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_bpe_fdl_",
+        "name": "Sugar, Jaggery & Salt",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/bpe&p[]=facets.category[]=73z/bpe/fdl/",
+        "isOptin": false
+      }
     ]
+  },
+  {
+    "id": "grp_Snacks_&_Beverages",
+    "group": "Snacks & Beverages",
+    "name": "🍟 Snacks & Beverages",
+    "allLabel": "Snacks & Beverages (All)",
+    "isGroup": true,
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/ujs",
+    "subs": [
+      {
+        "id": "sub_73z_ujs_eb9_",
+        "name": "Biscuits",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/ujs&p[]=facets.category[]=73z/ujs/eb9/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_ujs_dd9_",
+        "name": "Chips, Namkeen and Snacks",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/ujs&p[]=facets.category[]=73z/ujs/dd9/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_ujs_amr_",
+        "name": "Tea",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/ujs&p[]=facets.category[]=73z/ujs/amr/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_ujs_t7k_",
+        "name": "Coffee",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/ujs&p[]=facets.category[]=73z/ujs/t7k/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_ujs_afd_",
+        "name": "Juices",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/ujs&p[]=facets.category[]=73z/ujs/afd/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_ujs_vnq_",
+        "name": "Nutritional Drink Mix",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/ujs&p[]=facets.category[]=73z/ujs/vnq/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_ujs_dfw_",
+        "name": "Soft Drinks",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/ujs&p[]=facets.category[]=73z/ujs/dfw/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_ujs_iau_",
+        "name": "Instant Drink Mixes, Squash and Syrups",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/ujs&p[]=facets.category[]=73z/ujs/iau/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_ujs_wsx_",
+        "name": "Water",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/ujs&p[]=facets.category[]=73z/ujs/wsx/",
+        "isOptin": false
+      }
+    ]
+  },
+  {
+    "id": "grp_Dairy,_Bakery_and_Eggs",
+    "group": "Dairy, Bakery and Eggs",
+    "name": "🥛 Dairy, Bakery and Eggs",
+    "allLabel": "Dairy, Bakery and Eggs (All)",
+    "isGroup": true,
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/esa",
+    "subs": [
+      {
+        "id": "sub_73z_esa_dt6_",
+        "name": "Dairy",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/esa&p[]=facets.category[]=73z/esa/dt6/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_esa_hh7_",
+        "name": "Eggs",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/esa&p[]=facets.category[]=73z/esa/hh7/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_esa_93l_",
+        "name": "Bakery Sweets and Namkeen",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/esa&p[]=facets.category[]=73z/esa/93l/",
+        "isOptin": false
+      }
+    ]
+  },
+  {
+    "id": "grp_Packaged_Goods",
+    "group": "Packaged Goods",
+    "name": "🥫 Packaged Goods",
+    "allLabel": "Packaged Goods (All)",
+    "isGroup": true,
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z&p[]=facets.category[]=73z/u0u/",
+    "subs": [
+      {
+        "id": "sub_73z_u0u_ltz_",
+        "name": "Noodles and Pasta",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/u0u&p[]=facets.category[]=73z/u0u/ltz/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_u0u_7o6_",
+        "name": "Chocolates and Sweets",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/u0u&p[]=facets.category[]=73z/u0u/7o6/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_u0u_0tl_",
+        "name": "Ketchups and Spreads",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/u0u&p[]=facets.category[]=73z/u0u/0tl/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_u0u_bx9_",
+        "name": "Breakfast Cereals",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/u0u&p[]=facets.category[]=73z/u0u/bx9/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_u0u_j4e_",
+        "name": "Jam and Honey",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/u0u&p[]=facets.category[]=73z/u0u/j4e/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_u0u_wd7_",
+        "name": "Cooking Sauces and Vinegar",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/u0u&p[]=facets.category[]=73z/u0u/wd7/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_u0u_td1_",
+        "name": "Baking",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/u0u&p[]=facets.category[]=73z/u0u/td1/",
+        "isOptin": false
+      }
+    ]
+  },
+  {
+    "id": "grp_Personal_and_Baby_Care",
+    "group": "Personal and Baby Care",
+    "name": "🧼 Personal and Baby Care",
+    "allLabel": "Personal and Baby Care (All)",
+    "isGroup": true,
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z&p[]=facets.category[]=73z/njl/",
+    "subs": [
+      {
+        "id": "sub_73z_njl_sn6_",
+        "name": "Soaps and Body Wash",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/njl&p[]=facets.category[]=73z/njl/sn6/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_njl_vpw_",
+        "name": "Hair Care",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/njl&p[]=facets.category[]=73z/njl/vpw/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_njl_2s3_",
+        "name": "Oral Care",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/njl&p[]=facets.category[]=73z/njl/2s3/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_njl_np3_",
+        "name": "Deos, Perfumes and Talcs",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/njl&p[]=facets.category[]=73z/njl/np3/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_njl_n3m_",
+        "name": "Creams, Lotions Skin Care",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/njl&p[]=facets.category[]=73z/njl/n3m/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_njl_lzq_",
+        "name": "Kajal and Makeup",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/njl&p[]=facets.category[]=73z/njl/lzq/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_njl_tlj_",
+        "name": "Sanitary Needs",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/njl&p[]=facets.category[]=73z/njl/tlj/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_njl_07d_",
+        "name": "Wellness and Common Pharma",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/njl&p[]=facets.category[]=73z/njl/07d/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_njl_nw3_",
+        "name": "Shaving Needs",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/njl&p[]=facets.category[]=73z/njl/nw3/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_njl_smb_",
+        "name": "Diapers and Wipes",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/njl&p[]=facets.category[]=73z/njl/smb/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_njl_2jj_",
+        "name": "Baby Food",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/njl&p[]=facets.category[]=73z/njl/2jj/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_njl_m1f_",
+        "name": "Baby Bath and Skin Care",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/njl&p[]=facets.category[]=73z/njl/m1f/",
+        "isOptin": false
+      }
+    ]
+  },
+  {
+    "id": "grp_Fruits_and_Vegetables",
+    "group": "Fruits and Vegetables",
+    "name": "🍎 Fruits and Vegetables",
+    "allLabel": "Fruits and Vegetables (All)",
+    "isGroup": true,
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z&p[]=facets.category[]=73z/mk9/",
+    "subs": [
+      {
+        "id": "sub_73z_mk9_w9z_",
+        "name": "Fruits",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/mk9&p[]=facets.category[]=73z/mk9/w9z/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_mk9_aiw_",
+        "name": "Vegetables",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/mk9&p[]=facets.category[]=73z/mk9/aiw/",
+        "isOptin": false
+      }
+    ]
+  },
+  {
+    "id": "grp_Household_Care",
+    "group": "Household Care",
+    "name": "🧹 Household Care",
+    "allLabel": "Household Care (Excl. Pooja & Pet)",
+    "isGroup": true,
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/cwl/2z2/&p[]=facets.category[]=73z/cwl/bdc/&p[]=facets.category[]=73z/cwl/u3c/&p[]=facets.category[]=73z/cwl/qz9/&p[]=facets.category[]=73z/cwl/2wc/&p[]=facets.category[]=73z/cwl/0s4/",
+    "subs": [
+      {
+        "id": "sub_73z_cwl_2z2_",
+        "name": "Detergents and Laundry",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/cwl&p[]=facets.category[]=73z/cwl/2z2/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_cwl_bdc_",
+        "name": "Utensil Cleaners",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/cwl&p[]=facets.category[]=73z/cwl/bdc/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_cwl_u3c_",
+        "name": "Floor and Other Cleaners",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/cwl&p[]=facets.category[]=73z/cwl/u3c/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_cwl_qz9_",
+        "name": "Repellents and Fresheners",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/cwl&p[]=facets.category[]=73z/cwl/qz9/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_cwl_2wc_",
+        "name": "Paper and Disposables",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/cwl&p[]=facets.category[]=73z/cwl/2wc/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_cwl_0s4_",
+        "name": "Basic Electricals",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/cwl&p[]=facets.category[]=73z/cwl/0s4/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_cwl_m92_",
+        "name": "Pet Supplies (Opt-in)",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/cwl&p[]=facets.category[]=73z/cwl/m92/",
+        "isOptin": true
+      },
+      {
+        "id": "sub_73z_cwl_u64_",
+        "name": "Pooja Needs (Opt-in)",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/cwl&p[]=facets.category[]=73z/cwl/u64/",
+        "isOptin": true
+      }
+    ]
+  },
+  {
+    "id": "grp_Home_&_Kitchen",
+    "group": "Home & Kitchen",
+    "name": "🍳 Home & Kitchen",
+    "allLabel": "Home & Kitchen (Clean - Excl. Cases)",
+    "isGroup": true,
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/uyk/sgh/lbh/&p[]=facets.category[]=73z/uyk/sgh/ib1/&p[]=facets.category[]=73z/uyk/sgh/nlf/&p[]=facets.category[]=73z/uyk/hho/&p[]=facets.category[]=73z/uyk/vdx/&p[]=facets.category[]=73z/uyk/6f4/",
+    "subs": [
+      {
+        "id": "sub_73z_uyk_sgh_lbh_",
+        "name": "Home Utilities",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/uyk/sgh&p[]=facets.category[]=73z/uyk/sgh/lbh/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_uyk_sgh_ib1_",
+        "name": "Home Organisers",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/uyk/sgh&p[]=facets.category[]=73z/uyk/sgh/ib1/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_uyk_sgh_nlf_",
+        "name": "Hand Tools",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/uyk/sgh&p[]=facets.category[]=73z/uyk/sgh/nlf/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_uyk_hho_",
+        "name": "Kitchen Tools and Appliances",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/uyk&p[]=facets.category[]=73z/uyk/hho/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_uyk_vdx_",
+        "name": "Cookware and Serveware",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/uyk&p[]=facets.category[]=73z/uyk/vdx/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_uyk_6f4_",
+        "name": "Bath and Bed Essentials",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/uyk&p[]=facets.category[]=73z/uyk/6f4/",
+        "isOptin": false
+      },
+      {
+        "id": "sub_73z_uyk_hnw_",
+        "name": "Decor & Festive Needs (Opt-in)",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z&p[]=facets.category[]=73z/uyk/&p[]=facets.category[]=73z/uyk/hnw/",
+        "isOptin": true
+      },
+      {
+        "id": "sub_73z_uyk_sgh_jaa_",
+        "name": "Mobile Pouches (Opt-in)",
+        "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/uyk&p[]=facets.category[]=73z/uyk/sgh/&p[]=facets.category[]=73z/uyk/sgh/jaa/",
+        "isOptin": true
+      }
+    ]
+  },
+  {
+    "id": "grp_Office_and_School_Supplies",
+    "group": "Office and School Supplies",
+    "name": "📚 Office and School Supplies",
+    "allLabel": "Office and School Supplies (All)",
+    "isGroup": true,
+    "uri": "/grocery/office-school-supplies/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z,pyy&p[]=facets.category[]=73z&p[]=facets.category[]=73z/pyy/",
+    "subs": []
+  }
+];
+
+  /* Clean Main Groups for Full Store Scanning */
+  var MAIN_GROUPS = [
+  {
+    "id": "grp_Staples",
+    "group": "Staples",
+    "name": "🌾 Staples",
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/bpe"
+  },
+  {
+    "id": "grp_Snacks_&_Beverages",
+    "group": "Snacks & Beverages",
+    "name": "🍟 Snacks & Beverages",
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/ujs"
+  },
+  {
+    "id": "grp_Dairy,_Bakery_and_Eggs",
+    "group": "Dairy, Bakery and Eggs",
+    "name": "🥛 Dairy, Bakery and Eggs",
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/esa"
+  },
+  {
+    "id": "grp_Packaged_Goods",
+    "group": "Packaged Goods",
+    "name": "🥫 Packaged Goods",
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z&p[]=facets.category[]=73z/u0u/"
+  },
+  {
+    "id": "grp_Personal_and_Baby_Care",
+    "group": "Personal and Baby Care",
+    "name": "🧼 Personal and Baby Care",
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z&p[]=facets.category[]=73z/njl/"
+  },
+  {
+    "id": "grp_Fruits_and_Vegetables",
+    "group": "Fruits and Vegetables",
+    "name": "🍎 Fruits and Vegetables",
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z&p[]=facets.category[]=73z/mk9/"
+  },
+  {
+    "id": "grp_Household_Care",
+    "group": "Household Care",
+    "name": "🧹 Household Care",
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/cwl/2z2/&p[]=facets.category[]=73z/cwl/bdc/&p[]=facets.category[]=73z/cwl/u3c/&p[]=facets.category[]=73z/cwl/qz9/&p[]=facets.category[]=73z/cwl/2wc/&p[]=facets.category[]=73z/cwl/0s4/"
+  },
+  {
+    "id": "grp_Home_&_Kitchen",
+    "group": "Home & Kitchen",
+    "name": "🍳 Home & Kitchen",
+    "uri": "/grocery/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z&p[]=facets.category[]=73z/uyk/sgh/lbh/&p[]=facets.category[]=73z/uyk/sgh/ib1/&p[]=facets.category[]=73z/uyk/sgh/nlf/&p[]=facets.category[]=73z/uyk/hho/&p[]=facets.category[]=73z/uyk/vdx/&p[]=facets.category[]=73z/uyk/6f4/"
+  },
+  {
+    "id": "grp_Office_and_School_Supplies",
+    "group": "Office and School Supplies",
+    "name": "📚 Office and School Supplies",
+    "uri": "/grocery/office-school-supplies/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z,pyy&p[]=facets.category[]=73z&p[]=facets.category[]=73z/pyy/"
+  }
+];
+
+  /* Negative Filtering Blacklist */
+  var EXCLUDED_KEYWORDS = [
+    "back cover", "case cover", "phone cover", "mobile cover", "phone case",
+    "mobile case", "mobile pouch", "phone pouch", "tempered glass", "screen protector",
+    "screen guard", "camera protector", "camera lens protector",
+    "rakhi", "rakshabandhan", "lumba", "chuda rakhi", "roli chawal", "rakhee",
+    "puja thali", "pooja thali", "pooja needs", "puja needs", "hawan samagri",
+    "sambrani cup", "camphor tablet", "dhoop cone", "agarbatti stand", "diya brass",
+    "dog food", "cat food", "pet food", "puppy food", "kitten food", "bird food"
+  ];
+  var EXCLUDED_BRANDS = [
+  "100percent",
+  "abt",
+  "adofys",
+  "aircase",
+  "amazer",
+  "amzer",
+  "annprash",
+  "artistique",
+  "casotec",
+  "cease",
+  "cedo xpro",
+  "cover alive",
+  "craftvatika",
+  "d1769",
+  "designer rakhi",
+  "doubleshot",
+  "drools",
+  "ecraftindia",
+  "flipkart supemart",
+  "flipkart supermart home essentials",
+  "flipkart supermart kitchen essentials",
+  "golden tree collection",
+  "house of festivals",
+  "hritika",
+  "hyper mob",
+  "kartik crafts",
+  "kavish",
+  "kwine case",
+  "kyaso",
+  "mad over print",
+  "maru",
+  "me-o",
+  "mixtron",
+  "mudrika",
+  "mumbai creations",
+  "oye happy",
+  "paper plane design",
+  "parasnath",
+  "parth",
+  "parv craft",
+  "pedigree",
+  "picfest",
+  "purepet",
+  "quace",
+  "quickoo",
+  "religious ganesha rakhi",
+  "royal canin",
+  "rudraksh",
+  "shine craft",
+  "spigen",
+  "sunshine sale",
+  "tied ribbons",
+  "tomuncle",
+  "unbranded",
+  "vanya",
+  "whiskas"
+];
+
+  /* Dynamic Threshold Rules */
+  var DEFAULT_MIN_DISCOUNT = 45;
+  var BRAND_THRESHOLDS = {
+    "clothology": 90,
+    "decent home": 90,
+    "qxore": 90,
+    "sarvoch": 90,
+    "elegant weavers": 90,
+    "perpetual": 90,
+    "xbey": 90,
+    "fezora": 90,
+    "flipkart smartbuy": 90,
+    "crea4": 90,
+    "omortex": 90,
+    "bombay kookware": 90,
+    "deodap": 90
   };
 
-  /* Auto-detect active category if user is already browsing a Flipkart Minutes category */
-  var initialIdx = 0;
-  try {
-    var curUrl = window.location.href;
-    var sidMatch = curUrl.match(/sid=([^&]+)/i);
-    if (sidMatch) {
-      var decodedSid = decodeURIComponent(sidMatch[1]);
-      var matchIdx = CATEGORIES.findIndex(function(c){
-        return c.catId && (decodedSid === c.catId || decodedSid.startsWith(c.catId + "/") || c.catId.startsWith(decodedSid));
-      });
-      if (matchIdx !== -1) initialIdx = matchIdx;
-    }
-  } catch(e) {}
-
+  var initialCategory = CATEGORY_TREE[0];
   var st = {
     mode: "IDLE",
     sort: "discount",
     searchQuery: "",
     items: [],
     seen: new Set(),
-    selectedMode: CATEGORIES[initialIdx].uri,
-    selectedCatId: CATEGORIES[initialIdx].catId,
+    selectedItem: initialCategory,
+    selectedLabel: initialCategory.name,
     hideOos: true,
     isCollapsed: false
   };
@@ -154,159 +617,229 @@ javascript:(function(){
     return "";
   }
 
-  /* Inject Sidebar Styles */
+  /* Safe HTML escaping helper to prevent XSS injection from product titles & images */
+  function escapeHtml(s) {
+    if (s == null) return "";
+    return String(s)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  /* Inject Figma-inspired Clean Styles */
   var style = d.createElement("style");
   style.id = "fk-deals-styles";
   style.textContent = `
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    #fk-deals-sidebar, #fk-deals-pill {
+      --fkd-bg: #F7F7F8;
+      --fkd-header-bg: #FFFFFF;
+      --fkd-border: #E6E6E6;
+      --fkd-border-light: #EBEBEB;
+      --fkd-text-main: #1E1E1E;
+      --fkd-text-sub: #6E6E6E;
+      --fkd-text-muted: #8C8C8C;
+      --fkd-accent: #0D99FF;
+      --fkd-accent-hover: #0B85DE;
+      --fkd-danger: #F24822;
+      --fkd-card-bg: #FFFFFF;
+      --fkd-card-border: #E8E8E8;
+      --fkd-card-hover: #D1D5DB;
+      --fkd-dark: #1E1E1E;
+      --fkd-font: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+      font-family: var(--fkd-font);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
+      box-sizing: border-box;
+    }
+
+    #fk-deals-sidebar *, #fk-deals-pill * {
+      box-sizing: border-box;
+    }
+
     #fk-deals-sidebar {
       position: fixed;
       top: 0;
       right: 0;
-      width: 395px;
+      width: 400px;
       max-width: 100vw;
       height: 100vh;
-      background: #f8fafc;
+      background: var(--fkd-bg);
       z-index: 2147483647;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
       display: flex;
       flex-direction: column;
-      border: none;
-      box-shadow: -10px 0 35px rgba(0,0,0,0.14);
-      color: #0f172a;
-      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      border-left: 1px solid var(--fkd-border);
+      box-shadow: -6px 0 24px rgba(0, 0, 0, 0.08);
+      color: var(--fkd-text-main);
+      transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
     }
     #fk-deals-sidebar.collapsed {
       transform: translateX(105%);
       pointer-events: none;
     }
+
     #fk-deals-pill {
       position: fixed;
       bottom: 24px;
-      right: 18px;
+      right: 20px;
       z-index: 2147483647;
-      background: ${THEME};
-      color: #ffffff;
-      padding: 10px 18px;
-      border-radius: 30px;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      font-size: 13px;
-      font-weight: 700;
+      background: var(--fkd-dark);
+      color: #FFFFFF;
+      padding: 9px 15px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
       cursor: pointer;
-      box-shadow: 0 4px 18px rgba(37,99,235,0.45), 0 2px 6px rgba(0,0,0,0.15);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
       display: flex;
       align-items: center;
       gap: 8px;
-      border: none;
-      transition: transform 0.2s ease, background 0.15s ease;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: transform 0.18s ease, background 0.15s ease;
     }
     #fk-deals-pill:hover {
-      transform: scale(1.05);
-      background: ${THEME_DARK};
+      transform: translateY(-2px);
+      background: #000000;
     }
     #fk-deals-pill.hidden {
       display: none;
     }
+
     .fkd-badge {
-      background: #fde047;
-      color: #0f172a;
+      background: #F0F0F0;
+      color: var(--fkd-text-sub);
       font-size: 11px;
-      font-weight: 800;
-      padding: 2px 8px;
-      border-radius: 12px;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 9999px;
+      letter-spacing: -0.01em;
     }
+    #fk-deals-pill .fkd-badge {
+      background: var(--fkd-accent);
+      color: #FFFFFF;
+    }
+
     .fkd-header {
-      background: linear-gradient(135deg, ${THEME_DARK} 0%, ${THEME} 100%);
-      color: #ffffff;
-      padding: 14px 14px 12px 14px;
+      background: var(--fkd-header-bg);
+      border-bottom: 1px solid var(--fkd-border);
+      padding: 12px 14px;
       display: flex;
       flex-direction: column;
-      gap: 9px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
-      position: relative;
+      gap: 10px;
     }
+
     .fkd-top-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
     .fkd-title {
-      font-size: 15px;
-      font-weight: 800;
+      font-size: 13px;
+      font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 6px;
-      letter-spacing: -0.2px;
+      gap: 8px;
+      color: var(--fkd-text-main);
+      letter-spacing: -0.01em;
     }
     .fkd-controls {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
     }
     .fkd-icon-btn {
-      background: rgba(255,255,255,0.2);
+      background: transparent;
       border: none;
-      color: #ffffff;
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
+      color: var(--fkd-text-sub);
+      width: 26px;
+      height: 26px;
+      border-radius: 5px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 15px;
-      font-weight: bold;
-      transition: background 0.15s ease;
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.12s ease, color 0.12s ease;
     }
     .fkd-icon-btn:hover {
-      background: rgba(255,255,255,0.35);
+      background: #F0F0F0;
+      color: var(--fkd-text-main);
     }
+
     .fkd-search-row {
       display: flex;
       gap: 6px;
       align-items: center;
     }
     .fkd-input {
-      background: #ffffff;
-      color: #0f172a;
-      border: none;
-      border-radius: 8px;
+      background: #FFFFFF;
+      color: var(--fkd-text-main);
+      border: 1px solid #D9D9D9;
+      border-radius: 6px;
       padding: 7px 10px;
       font-size: 12px;
-      font-weight: 500;
+      font-weight: 400;
+      font-family: inherit;
       outline: none;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-      transition: box-shadow 0.15s ease;
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .fkd-input::placeholder {
+      color: var(--fkd-text-muted);
     }
     .fkd-input:focus {
-      box-shadow: 0 0 0 2px rgba(255,255,255,0.8), 0 1px 4px rgba(0,0,0,0.2);
+      border-color: var(--fkd-accent);
+      box-shadow: 0 0 0 2px rgba(13, 153, 255, 0.16);
     }
+
+    .fkd-btn-search {
+      background: var(--fkd-accent);
+      color: #FFFFFF;
+      border: 1px solid var(--fkd-accent);
+      border-radius: 6px;
+      padding: 0 12px;
+      height: 31px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.12s ease;
+      flex: none;
+    }
+    .fkd-btn-search:hover {
+      background: var(--fkd-accent-hover);
+    }
+
     .fkd-row-2 {
       position: relative;
       width: 100%;
     }
     .fkd-cat-toggle {
       width: 100%;
-      background: #ffffff;
-      color: #0f172a;
-      border: none;
-      border-radius: 8px;
-      padding: 7px 12px;
+      background: #FFFFFF;
+      color: var(--fkd-text-main);
+      border: 1px solid #D9D9D9;
+      border-radius: 6px;
+      padding: 7px 10px;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 500;
+      font-family: inherit;
       text-align: left;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 6px;
-      overflow: hidden;
+      gap: 8px;
       outline: none;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-      transition: background 0.15s ease, box-shadow 0.15s ease;
+      transition: border-color 0.15s ease, background 0.15s ease;
     }
     .fkd-cat-toggle:hover {
-      background: #f8fafc;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+      border-color: #BDBDBD;
+      background: #FAFAFA;
     }
     .fkd-cat-toggle-text {
       white-space: nowrap;
@@ -315,20 +848,21 @@ javascript:(function(){
       flex: 1;
     }
     .fkd-caret {
-      font-size: 10px;
-      color: #64748b;
-      transition: transform 0.2s ease;
+      font-size: 11px;
+      color: var(--fkd-text-sub);
+      transition: transform 0.15s ease;
     }
+
     .fkd-cat-drawer {
       position: absolute;
       top: calc(100% + 4px);
       left: 0;
       right: 0;
-      background: #ffffff;
-      border-radius: 10px;
-      border: none;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.22), 0 2px 8px rgba(0,0,0,0.08);
-      max-height: 290px;
+      background: #FFFFFF;
+      border-radius: 8px;
+      border: 1px solid #D9D9D9;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12), 0 2px 6px rgba(0, 0, 0, 0.04);
+      max-height: 380px;
       overflow-y: auto;
       z-index: 50;
       padding: 6px;
@@ -339,28 +873,141 @@ javascript:(function(){
     .fkd-cat-drawer.hidden {
       display: none;
     }
-    .fkd-cat-item {
-      padding: 7px 10px;
+
+    /* Figma Tree View Elements */
+    .fkd-tree-master {
+      padding: 8px 10px;
       border-radius: 6px;
-      font-size: 11.5px;
+      font-size: 12px;
       font-weight: 600;
-      color: #334155;
+      color: var(--fkd-text-main);
+      background: #F5F5F5;
       cursor: pointer;
+      margin-bottom: 4px;
+      border: 1px solid var(--fkd-border-light);
+      transition: background 0.12s ease;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      transition: background 0.15s ease, color 0.15s ease;
+      gap: 6px;
     }
-    .fkd-cat-item:hover {
-      background: #eff6ff;
-      color: #1d4ed8;
+    .fkd-tree-master:hover {
+      background: #EBEBEB;
     }
-    .fkd-cat-item.active {
-      background: #dbeafe;
-      color: #1e40af;
-      font-weight: 800;
+    .fkd-tree-master.active {
+      background: #E8F4FD;
+      color: var(--fkd-accent);
+      border-color: #BAE6FD;
     }
-    /* Toolbar: Exact Equal-Sized Pills (flex: 1 1 0) */
+
+    .fkd-tree-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .fkd-group-row {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 5px 6px;
+      border-radius: 5px;
+      cursor: pointer;
+      user-select: none;
+      transition: background 0.12s ease;
+    }
+    .fkd-group-row:hover {
+      background: #F5F5F5;
+    }
+    .fkd-group-row.active {
+      background: #E8F4FD;
+    }
+
+    .fkd-tree-chevron {
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      color: var(--fkd-text-sub);
+      font-size: 10px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background 0.12s ease, transform 0.15s ease;
+      flex: none;
+      padding: 0;
+    }
+    .fkd-tree-chevron:hover {
+      background: #EBEBEB;
+      color: var(--fkd-text-main);
+    }
+    .fkd-tree-chevron.hidden {
+      visibility: hidden;
+    }
+
+    .fkd-group-title {
+      flex: 1;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--fkd-text-main);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .fkd-group-all-btn {
+      background: #F0F0F0;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 10.5px;
+      font-weight: 500;
+      color: var(--fkd-text-sub);
+      cursor: pointer;
+      flex: none;
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+    .fkd-group-all-btn:hover {
+      background: var(--fkd-accent);
+      color: #FFFFFF;
+    }
+
+    .fkd-sub-container {
+      margin-left: 14px;
+      padding-left: 8px;
+      border-left: 1.5px solid var(--fkd-border-light);
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      margin-top: 2px;
+      margin-bottom: 4px;
+    }
+    .fkd-sub-container.collapsed {
+      display: none;
+    }
+
+    .fkd-sub-item {
+      padding: 5px 8px;
+      font-size: 11.5px;
+      font-weight: 400;
+      color: #374151;
+      border-radius: 4px;
+      cursor: pointer;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      transition: background 0.12s ease, color 0.12s ease;
+    }
+    .fkd-sub-item:hover {
+      background: #F0F0F0;
+      color: var(--fkd-text-main);
+    }
+    .fkd-sub-item.active {
+      background: #E8F4FD;
+      color: var(--fkd-accent);
+      font-weight: 600;
+    }
+
+    /* Toolbar Segmented Controls */
     .fkd-toolbar {
       display: flex;
       gap: 6px;
@@ -370,72 +1017,76 @@ javascript:(function(){
     .fkd-pill {
       flex: 1 1 0;
       min-width: 0;
-      height: 30px;
+      height: 29px;
       padding: 0 4px;
       border-radius: 6px;
-      background: rgba(255, 255, 255, 0.18);
-      color: #ffffff;
-      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: #FFFFFF;
+      color: var(--fkd-text-main);
+      border: 1px solid #D9D9D9;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 500;
+      font-family: inherit;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       white-space: nowrap;
-      transition: all 0.15s ease;
+      transition: all 0.12s ease;
       user-select: none;
-      box-sizing: border-box;
       outline: none;
     }
     .fkd-pill:hover {
-      background: rgba(255, 255, 255, 0.28);
+      background: #F5F5F5;
+      border-color: #BDBDBD;
     }
     .fkd-pill.active {
-      background: #ffffff;
-      color: ${THEME_DARK};
-      border-color: #ffffff;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+      background: var(--fkd-dark);
+      color: #FFFFFF;
+      border-color: var(--fkd-dark);
+      font-weight: 600;
     }
+
     .fkd-pill-action {
-      background: #fde047;
-      color: #0f172a;
-      border-color: #fde047;
-      font-weight: 800;
+      background: var(--fkd-accent) !important;
+      color: #FFFFFF !important;
+      border-color: var(--fkd-accent) !important;
+      font-weight: 600;
     }
     .fkd-pill-action:hover {
-      background: #facc15;
+      background: var(--fkd-accent-hover) !important;
     }
+
     .fkd-pill-danger {
-      background: #ef4444 !important;
-      color: #ffffff !important;
-      border-color: #ef4444 !important;
-      font-weight: 800;
+      background: var(--fkd-danger) !important;
+      color: #FFFFFF !important;
+      border-color: var(--fkd-danger) !important;
+      font-weight: 600;
     }
-    /* Dedicated Full-Width Status Bar to avoid pill resizing */
+
     .fkd-status-bar {
       display: flex;
       align-items: center;
       gap: 6px;
-      padding-top: 2px;
-      min-height: 16px;
+      min-height: 15px;
     }
     .fkd-status-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: #38bdf8;
+      background: var(--fkd-accent);
       flex-shrink: 0;
     }
     .fkd-status-text {
       font-size: 11px;
-      color: #e0e7ff;
+      color: var(--fkd-text-sub);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       flex: 1;
-      font-weight: 500;
+      font-weight: 400;
     }
+
+    /* Product Grid & Cards */
     .fkd-grid {
       flex: 1;
       overflow-y: auto;
@@ -444,38 +1095,41 @@ javascript:(function(){
       grid-template-columns: repeat(2, 1fr);
       gap: 10px;
       align-content: start;
+      background: var(--fkd-bg);
     }
+
     .fkd-card {
-      background: #ffffff;
-      border-radius: 10px;
-      border: none;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+      background: var(--fkd-card-bg);
+      border: 1px solid var(--fkd-card-border);
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
       padding: 8px;
       display: flex;
       flex-direction: column;
       cursor: pointer;
       position: relative;
-      transition: transform 0.15s ease, box-shadow 0.15s ease;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
     }
     .fkd-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 16px -2px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+      border-color: var(--fkd-card-hover);
     }
     .fkd-card.oos {
-      opacity: 0.62;
-      background: #f8fafc;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+      opacity: 0.6;
+      filter: grayscale(0.2);
     }
+
     .fkd-img-box {
       position: relative;
       width: 100%;
-      height: 110px;
+      height: 112px;
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 6px;
-      background: #f8fafc;
-      border-radius: 8px;
+      margin-bottom: 7px;
+      background: #FFFFFF;
+      border-radius: 6px;
       overflow: hidden;
     }
     .fkd-img {
@@ -483,44 +1137,66 @@ javascript:(function(){
       max-height: 100%;
       object-fit: contain;
     }
+
+    /* Stacked Larger Discount Tag (User Requested: 70% above OFF) */
     .fkd-disc-tag {
       position: absolute;
-      top: 4px;
-      left: 4px;
-      background: #15803d;
-      color: #ffffff;
-      font-size: 10px;
-      font-weight: 800;
-      padding: 2px 6px;
-      border-radius: 4px;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.12);
+      top: 5px;
+      left: 5px;
+      background: var(--fkd-dark);
+      color: #FFFFFF;
+      padding: 3px 6px;
+      border-radius: 5px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      line-height: 1.05;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.18);
+      pointer-events: none;
+      z-index: 2;
     }
+    .fkd-disc-pct {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .fkd-disc-off {
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
     .fkd-oos-tag {
       position: absolute;
       bottom: 4px;
       left: 4px;
       right: 4px;
-      background: rgba(220, 38, 38, 0.92);
-      color: #ffffff;
+      background: rgba(242, 72, 34, 0.92);
+      color: #FFFFFF;
       font-size: 9px;
-      font-weight: 800;
+      font-weight: 700;
       text-align: center;
       padding: 2px 0;
       border-radius: 4px;
       letter-spacing: 0.3px;
     }
+
     .fkd-card-title {
-      font-size: 11px;
-      font-weight: 600;
-      color: #1e293b;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--fkd-text-main);
       line-height: 1.35;
       margin-bottom: 6px;
-      height: 29px;
+      height: 31px;
       overflow: hidden;
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
     }
+
     .fkd-price-row {
       margin-top: auto;
       display: flex;
@@ -529,21 +1205,23 @@ javascript:(function(){
     }
     .fkd-price {
       font-size: 14px;
-      font-weight: 800;
-      color: #0f172a;
+      font-weight: 700;
+      color: var(--fkd-text-main);
+      letter-spacing: -0.01em;
     }
     .fkd-mrp {
       font-size: 11px;
-      color: #94a3b8;
+      color: var(--fkd-text-muted);
       text-decoration: line-through;
-      font-weight: 500;
+      font-weight: 400;
     }
+
     .fkd-empty {
       grid-column: 1 / -1;
       text-align: center;
       padding: 40px 15px;
-      color: #64748b;
-      font-size: 13px;
+      color: var(--fkd-text-sub);
+      font-size: 12.5px;
       line-height: 1.6;
     }
   `;
@@ -567,17 +1245,17 @@ javascript:(function(){
           <span class="fkd-badge" id="fkd-head-count">0 Items</span>
         </div>
         <div class="fkd-controls">
-          <button class="fkd-icon-btn" id="fkd-btn-min" title="Minimize / Collapse">_</button>
-          <button class="fkd-icon-btn" id="fkd-btn-close" title="Close">✕</button>
+          <button class="fkd-icon-btn" id="fkd-btn-min" type="button" title="Minimize / Collapse">—</button>
+          <button class="fkd-icon-btn" id="fkd-btn-close" type="button" title="Close">✕</button>
         </div>
       </div>
       <div class="fkd-search-row">
-        <input type="text" class="fkd-input" id="fkd-input-search" placeholder="🔍 Search e.g. cake, milk, chips..." style="flex:1" title="Type keyword and press Enter or click Search">
-        <button class="fkd-pill fkd-pill-action" id="fkd-btn-search" style="flex:none;width:68px">Search</button>
+        <input type="text" class="fkd-input" id="fkd-input-search" placeholder="🔍 Search e.g. cake, ghee, surf..." style="flex:1" title="Type keyword and press Enter or click Search">
+        <button class="fkd-btn-search" id="fkd-btn-search">Search</button>
       </div>
       <div class="fkd-row-2">
         <button class="fkd-cat-toggle" id="fkd-cat-toggle" type="button" title="Browse & select Flipkart Minutes categories">
-          <span class="fkd-cat-toggle-text" id="fkd-selected-cat-name">${CATEGORIES[initialIdx].name}</span>
+          <span class="fkd-cat-toggle-text" id="fkd-selected-cat-name">${initialCategory.name}</span>
           <span class="fkd-caret" id="fkd-cat-caret">▾</span>
         </button>
         <div id="fkd-cat-drawer" class="fkd-cat-drawer hidden"></div>
@@ -594,7 +1272,7 @@ javascript:(function(){
       </div>
     </div>
     <div id="fkd-grid" class="fkd-grid">
-      <div class="fkd-empty">Select a category and click <b>Fetch ⚡</b>, or search above to find top deals.</div>
+      <div class="fkd-empty">Click <b>Fetch ⚡</b> to scan top deals across Flipkart Minutes, or pick a category above.</div>
     </div>
   `;
   d.body.appendChild(sb);
@@ -627,31 +1305,118 @@ javascript:(function(){
     toggleCatDrawer();
   };
 
-  /* Render direct flat list of all verified categories inside drawer */
-  CATEGORIES.forEach(function(item, idx){
-    var itemEl = d.createElement("div");
-    itemEl.className = "fkd-cat-item" + (idx === initialIdx ? " active" : "");
-    itemEl.textContent = item.name;
+  function selectCategory(item, label) {
+    st.selectedItem = item;
+    st.selectedLabel = label;
+    catNameDisplay.textContent = label;
+    if (inputSearch) inputSearch.value = "";
+    st.searchQuery = "";
 
-    itemEl.onclick = function(e) {
+    /* Default to sort by discount */
+    st.sort = "discount";
+    btnSortDisc.classList.add("active");
+    btnSortPrice.classList.remove("active");
+
+    closeCatDrawer();
+    setStatus("Selected: " + label);
+  }
+
+  /* Render Figma Collapsible Category Tree */
+  CATEGORY_TREE.forEach(function(item) {
+    if (item.isMaster) {
+      var masterEl = d.createElement("div");
+      masterEl.className = "fkd-tree-master active";
+      masterEl.innerHTML = `<span>🔥</span><span>Scan All Categories (Top Deals)</span>`;
+      masterEl.onclick = function(e) {
+        e.stopPropagation();
+        d.querySelectorAll(".fkd-tree-master, .fkd-group-row, .fkd-sub-item").forEach(function(el){ el.classList.remove("active"); });
+        masterEl.classList.add("active");
+        selectCategory(item, item.name);
+      };
+      catDrawer.appendChild(masterEl);
+      return;
+    }
+
+    var groupWrapper = d.createElement("div");
+    groupWrapper.className = "fkd-tree-group";
+
+    var headerRow = d.createElement("div");
+    headerRow.className = "fkd-group-row";
+
+    var hasSubs = item.subs && item.subs.length > 0;
+
+    var chevron = d.createElement("button");
+    chevron.type = "button";
+    chevron.className = "fkd-tree-chevron" + (hasSubs ? "" : " hidden");
+    chevron.innerHTML = "▸";
+    chevron.title = "Expand subcategories";
+
+    var titleSpan = d.createElement("div");
+    titleSpan.className = "fkd-group-title";
+    titleSpan.textContent = item.name;
+
+    var allBtn = d.createElement("button");
+    allBtn.type = "button";
+    allBtn.className = "fkd-group-all-btn";
+    allBtn.textContent = "All";
+    allBtn.title = "Select " + (item.allLabel || item.name);
+
+    headerRow.appendChild(chevron);
+    headerRow.appendChild(titleSpan);
+    headerRow.appendChild(allBtn);
+    groupWrapper.appendChild(headerRow);
+
+    var subContainer = d.createElement("div");
+    subContainer.className = "fkd-sub-container collapsed";
+
+    if (hasSubs) {
+      item.subs.forEach(function(sub) {
+        var subEl = d.createElement("div");
+        subEl.className = "fkd-sub-item";
+        subEl.textContent = sub.name;
+        subEl.title = sub.name;
+        subEl.onclick = function(e) {
+          e.stopPropagation();
+          d.querySelectorAll(".fkd-tree-master, .fkd-group-row, .fkd-sub-item").forEach(function(el){ el.classList.remove("active"); });
+          subEl.classList.add("active");
+          headerRow.classList.add("active");
+          selectCategory(sub, item.name + " › " + sub.name);
+        };
+        subContainer.appendChild(subEl);
+      });
+
+      function toggleGroup(e) {
+        e.stopPropagation();
+        var isCol = subContainer.classList.contains("collapsed");
+        if (isCol) {
+          subContainer.classList.remove("collapsed");
+          chevron.innerHTML = "▾";
+        } else {
+          subContainer.classList.add("collapsed");
+          chevron.innerHTML = "▸";
+        }
+      }
+
+      chevron.onclick = toggleGroup;
+      titleSpan.onclick = toggleGroup;
+    } else {
+      titleSpan.onclick = function(e) {
+        e.stopPropagation();
+        d.querySelectorAll(".fkd-tree-master, .fkd-group-row, .fkd-sub-item").forEach(function(el){ el.classList.remove("active"); });
+        headerRow.classList.add("active");
+        selectCategory(item, item.name);
+      };
+    }
+
+    allBtn.onclick = function(e) {
       e.stopPropagation();
-      d.querySelectorAll(".fkd-cat-item").forEach(function(el){ el.classList.remove("active"); });
-      itemEl.classList.add("active");
-      st.selectedMode = item.uri;
-      st.selectedCatId = item.catId;
-      catNameDisplay.textContent = item.name;
-      if (inputSearch) inputSearch.value = "";
-      st.searchQuery = "";
-
-      /* User Requirement: Default option should be sort by discount on choosing category */
-      st.sort = "discount";
-      btnSortDisc.classList.add("active");
-      btnSortPrice.classList.remove("active");
-
-      closeCatDrawer();
-      setStatus("Selected: " + item.name);
+      d.querySelectorAll(".fkd-tree-master, .fkd-group-row, .fkd-sub-item").forEach(function(el){ el.classList.remove("active"); });
+      headerRow.classList.add("active");
+      selectCategory(item, item.name + " (All)");
     };
-    catDrawer.appendChild(itemEl);
+
+    groupWrapper.appendChild(subContainer);
+    catDrawer.appendChild(groupWrapper);
   });
 
   /* Close drawer when clicking outside inside sidebar */
@@ -696,7 +1461,7 @@ javascript:(function(){
     btnFetch.className = "fkd-pill fkd-pill-action";
     if (btnSearch) {
       btnSearch.textContent = "Search";
-      btnSearch.className = "fkd-pill fkd-pill-action";
+      btnSearch.className = "fkd-btn-search";
     }
   }
 
@@ -762,7 +1527,11 @@ javascript:(function(){
     } else {
       btnFetch.textContent = "Stop ⏹";
       btnFetch.className = "fkd-pill fkd-pill-danger";
-      startCategoryFetch();
+      if (st.selectedItem && st.selectedItem.isMaster) {
+        startAllCategoriesFetch();
+      } else {
+        startCategoryFetch();
+      }
     }
   };
 
@@ -787,20 +1556,27 @@ javascript:(function(){
     pillCount.textContent = filtered.length;
 
     if (!filtered.length) {
-      grid.innerHTML = `<div class="fkd-empty">${st.items.length ? 'No items match current criteria.<br><br>(Total scanned: ' + st.items.length + (st.hideOos ? ', Out of stock hidden' : '') + ')' : 'No deals loaded yet. Select a category or search above.'}</div>`;
+      grid.innerHTML = `<div class="fkd-empty">${st.items.length ? 'No items match current criteria.<br><br>(Total scanned: ' + st.items.length + (st.hideOos ? ', Out of stock hidden' : '') + ')' : 'No deals loaded yet. Click Fetch ⚡ or search above.'}</div>`;
       return;
     }
 
     filtered.forEach(function(it){
       var card = d.createElement("div");
       card.className = "fkd-card" + (it.oos ? " oos" : "");
+      var safeTitle = escapeHtml(it.t);
+      var safeImg = escapeHtml(it.i);
       card.innerHTML = `
         <div class="fkd-img-box">
-          <img src="${it.i}" class="fkd-img" loading="lazy" onerror="this.src='https://rukminim1.flixcart.com/flap/200/200/image/placeholder.png'">
-          ${it.d > 0 ? `<div class="fkd-disc-tag">${it.d}% OFF</div>` : ''}
+          <img src="${safeImg}" class="fkd-img" loading="lazy" onerror="this.src='https://rukminim1.flixcart.com/flap/200/200/image/placeholder.png'">
+          ${it.d > 0 ? `
+            <div class="fkd-disc-tag">
+              <span class="fkd-disc-pct">${it.d}%</span>
+              <span class="fkd-disc-off">OFF</span>
+            </div>
+          ` : ''}
           ${it.oos ? `<div class="fkd-oos-tag">OUT OF STOCK</div>` : ''}
         </div>
-        <div class="fkd-card-title" title="${it.t.replace(/"/g, '&quot;')}">${it.t}</div>
+        <div class="fkd-card-title" title="${safeTitle}">${safeTitle}</div>
         <div class="fkd-price-row">
           <span class="fkd-price">₹${it.f}</span>
           ${it.m > it.f ? `<span class="fkd-mrp">₹${it.m}</span>` : ''}
@@ -822,6 +1598,21 @@ javascript:(function(){
     if (!title || title === "Product" || title.length < 3) {
       var urlTitle = extractTitleFromUrl(lnk);
       title = urlTitle || title || "Product";
+    }
+
+    /* Negative keyword & brand filtration (Junk prevention) */
+    var tLower = (title || "").toLowerCase();
+    for (var k = 0; k < EXCLUDED_KEYWORDS.length; k++) {
+      if (tLower.includes(EXCLUDED_KEYWORDS[k])) return false;
+    }
+    /* Religious brands exclusion (starts with reli... except relish) */
+    var words = tLower.match(/\b[a-z]+/g) || [];
+    for (var w = 0; w < words.length; w++) {
+      if (words[w].startsWith("reli") && !words[w].startsWith("relish")) return false;
+    }
+    for (var b = 0; b < EXCLUDED_BRANDS.length; b++) {
+      var eb = EXCLUDED_BRANDS[b].toLowerCase();
+      if (tLower.startsWith(eb + " ") || tLower.includes(" by " + eb) || tLower === eb || tLower.includes(" " + eb + " ")) return false;
     }
 
     mrp = mrp ? parseInt(mrp, 10) : fsp;
@@ -853,12 +1644,38 @@ javascript:(function(){
       }
     }
 
+    /* Threshold verification (default 45% across all categories, bypassed during search) */
+    var isSearchMode = !!(st.searchQuery && st.searchQuery.trim().length > 0);
+    if (!isSearchMode) {
+      var effectiveMin = DEFAULT_MIN_DISCOUNT;
+      for (var bt in BRAND_THRESHOLDS) {
+        if (tLower.startsWith(bt + " ") || tLower.includes(" by " + bt) || tLower === bt || tLower.includes(" " + bt + " ")) {
+          effectiveMin = Math.max(effectiveMin, BRAND_THRESHOLDS[bt]);
+          break;
+        }
+      }
+      if (disc < effectiveMin) return false;
+    }
+
     /* Ensure deal links open directly in Flipkart Minutes */
     if (lnk && !lnk.includes("marketplace=HYPERLOCAL")) {
       lnk += (lnk.includes("?") ? "&" : "?") + "marketplace=HYPERLOCAL";
     }
 
-    var uid = title + "_" + fsp;
+    /* Robust UID: extract Flipkart PID from product URL, fallback to normalized title + price */
+    var pid = "";
+    if (lnk) {
+      var mPid = lnk.match(/[?&]pid=([a-zA-Z0-9_-]+)/i);
+      if (mPid && mPid[1]) {
+        pid = mPid[1];
+      } else {
+        var mItm = lnk.match(/\/p\/(itm[a-zA-Z0-9_-]+)/i);
+        if (mItm && mItm[1]) pid = mItm[1];
+      }
+    }
+    var normTitle = (title || "").toLowerCase().replace(/\s+/g, " ").trim();
+    var uid = pid ? ("pid_" + pid) : (normTitle + "_" + fsp);
+
     if (!st.seen.has(uid)) {
       st.seen.add(uid);
       st.items.push({ t: title, f: fsp, m: mrp, d: disc, i: img, l: lnk, oos: !!isOos });
@@ -873,7 +1690,8 @@ javascript:(function(){
     if (!json) return count;
     var slots = json.RESPONSE?.slots || json.slots || json.pageData?.slots || json.multiWidgetState?.widgetsData?.slots || json.multiWidgetState?.pageDataResponse?.slots || [];
     slots.forEach(function(s){
-      var w = s.widget || {};
+      var slotObj = s.slotData || s;
+      var w = slotObj.widget || slotObj;
       var wdata = w.data || {};
 
       /* 1. Standard Product Summaries */
@@ -898,7 +1716,6 @@ javascript:(function(){
             var img = v.media?.images?.[0]?.url || v.images?.[0]?.url || "";
             img = img.replace("{@width}", "200").replace("{@height}", "200").replace("?q={@quality}", "?q=80");
 
-            /* Determine Out of Stock status */
             var isOos = (v.availability?.displayState === "OUT_OF_STOCK") ||
                         (v.productAction?.value?.enabled === false) ||
                         (v.productAction?.value?.actionType === "NOTIFY_ME") ||
@@ -932,13 +1749,13 @@ javascript:(function(){
                   var fsp = 0;
                   var l4 = snbText.label_4?.value;
                   var l4Val = (typeof l4 === "object") ? (l4.UNLOCKED?.value?.params?.defaultValue || l4.LOCKED?.value?.params?.defaultValue || l4.text || "") : String(l4 || "");
-                  var matchFsp = l4Val.match(/\d+/);
+                  var matchFsp = l4Val.replace(/,/g, "").match(/\d+/);
                   if (matchFsp) fsp = parseInt(matchFsp[0], 10);
 
                   var mrp = fsp;
                   var l3 = snbText.label_3?.value;
                   var l3Val = (typeof l3 === "object") ? (l3.params?.defaultValue || l3.text || "") : String(l3 || "");
-                  var matchMrp = l3Val.match(/\d+/);
+                  var matchMrp = l3Val.replace(/,/g, "").match(/\d+/);
                   if (matchMrp) mrp = parseInt(matchMrp[0], 10);
 
                   var disc = 0;
@@ -952,12 +1769,15 @@ javascript:(function(){
                   }
 
                   var stepper = cval.stepperData_0?.action || cval.snb_beauty_gmh_image_0?.value?.stepperData_0?.action;
-                  if (!fsp && stepper?.params?.price) fsp = parseInt(stepper.params.price, 10);
-                  if (!fsp && stepper?.tracking?.fsp) fsp = parseInt(stepper.tracking.fsp, 10);
-                  if (stepper?.tracking?.mrp) mrp = parseInt(stepper.tracking.mrp, 10);
+                  if (!fsp && stepper?.tracking?.fsp) fsp = parseInt(String(stepper.tracking.fsp).replace(/,/g, ""), 10);
+                  if (!fsp && stepper?.params?.price) fsp = parseInt(String(stepper.params.price).replace(/,/g, ""), 10);
+                  if ((!mrp || mrp === fsp) && stepper?.tracking?.mrp) mrp = parseInt(String(stepper.tracking.mrp).replace(/,/g, ""), 10);
 
                   if (fsp && mrp && fsp > mrp) {
                     var t = fsp; fsp = mrp; mrp = t;
+                  }
+                  if (disc === 0 && mrp > fsp) {
+                    disc = Math.round(((mrp - fsp) / mrp) * 100);
                   }
 
                   var isOos = (stepper?.tracking?.isAvailable === "false") || (stepper?.enabled === false) || (cval.action?.params?.isAvailable === false);
@@ -984,20 +1804,20 @@ javascript:(function(){
                 if (pcard) {
                   var stepperAction = pcard.stepperData_0?.action || {};
                   var stepperTracking = stepperAction.tracking || {};
-                  var fsp = stepperTracking.fsp || stepperAction.params?.price;
-                  var mrp = stepperTracking.mrp;
+                  var fsp = parseInt(String(stepperTracking.fsp || stepperAction.params?.price || "").replace(/,/g, ""), 10) || 0;
+                  var mrp = parseInt(String(stepperTracking.mrp || "").replace(/,/g, ""), 10) || 0;
 
                   if (!fsp && pcard.label_5?.value) {
                     var l5 = pcard.label_5.value;
                     var l5Str = (typeof l5 === "object") ? (l5.LOCKED?.value?.text || l5.UNLOCKED?.value?.text || "") : String(l5);
-                    var match5 = l5Str.match(/\d+/);
+                    var match5 = l5Str.replace(/,/g, "").match(/\d+/);
                     if (match5) fsp = parseInt(match5[0], 10);
                   }
 
                   if (!mrp && pcard.label_4?.value) {
                     var l4 = pcard.label_4.value;
                     var l4Str = (typeof l4 === "object") ? (l4.text || "") : String(l4);
-                    var match4 = l4Str.match(/\d+/);
+                    var match4 = l4Str.replace(/,/g, "").match(/\d+/);
                     if (match4) mrp = parseInt(match4[0], 10);
                   }
 
@@ -1039,7 +1859,7 @@ javascript:(function(){
     return count;
   }
 
-  /* Scrape items from DOM (WITHOUT SCROLLING) */
+  /* Scrape items from DOM */
   function parseDomProducts(rootDoc) {
     var doc = rootDoc || document;
     var count = 0;
@@ -1052,13 +1872,11 @@ javascript:(function(){
         if (!href || href.includes("javascript:") || href.length < 5) return;
         if (!href.startsWith("http")) href = "https://www.flipkart.com" + href;
 
-        /* Find outer card container */
         var card = a.closest('[data-id], [class*="card" i], [class*="product" i], [class*="grid" i], [class*="_1AtVbE"]') || a.parentElement;
         var cardKey = (card && card.getAttribute && card.getAttribute("data-id")) || href.split("?")[0];
         if (cardKey && processedCards.has(cardKey)) return;
         if (cardKey) processedCards.add(cardKey);
 
-        /* Extract price elements specifically if present */
         var fsp = 0;
         var mrp = 0;
         var disc = 0;
@@ -1080,15 +1898,11 @@ javascript:(function(){
           if (m3) disc = parseInt(m3[1], 10);
         }
 
-        /* Fallback to text matching if specific classes were not found */
         if (!fsp) {
           var text = (card ? card.innerText : a.innerText) || "";
-
-          /* Remove promotional "save extra ₹20" to avoid picking offer amounts as product price */
           text = text.replace(/save\s*(?:extra\s*)?(?:₹|\u20b9)\s*\d+/gi, "")
                      .replace(/buy\s*\d+\s*(?:items|get|for)[^₹\n]*(?:₹|\u20b9)\s*\d+/gi, "");
 
-          /* Pre-normalize text to separate adjacent price and discount digits */
           text = text.replace(/(?:₹|\u20b9)\s*([0-9,]+?)(\d{1,2})%\s*off/gi, "₹$1 $2% off")
                      .replace(/([0-9])([0-9]{2}%)/g, "$1 $2")
                      .replace(/(?:₹|\u20b9)\s*([0-9,]+)(?=[0-9]{2}%)/g, "₹$1 ");
@@ -1116,11 +1930,9 @@ javascript:(function(){
           }
         }
 
-        /* Image extraction */
         var imgEl = (card || a).querySelector('img[src*="rukminim"], img[src*="flixcart"], img');
         var img = imgEl ? (imgEl.src || imgEl.getAttribute("src") || "") : "";
 
-        /* Multi-strategy Title Extraction */
         var title = "";
         var titleEl = (card || a).querySelector('[class*="title" i], [class*="name" i], [class*="pIpigb"], [class*="wjcEIp"], [class*="s1Q9rs"], [class*="_4rR01T"], [class*="_2Wk75y"]');
         if (titleEl && titleEl.innerText && titleEl.innerText.trim().length > 3) {
@@ -1152,7 +1964,6 @@ javascript:(function(){
           title = extractTitleFromUrl(href) || "Product";
         }
 
-        /* Comprehensive Out-of-Stock Detection ("Currently unavailable", "Notify Me", etc.) */
         var isOos = /currently\s*unavailable|unavailable|out\s*of\s*stock|sold\s*out|notify\s*me/i.test((card ? card.innerText : a.innerText) || "") ||
                     !!(card && card.querySelector('button[disabled], [class*="unavailable" i], [class*="outOfStock" i], [class*="notify" i], [aria-label*="notify" i]'));
 
@@ -1162,7 +1973,7 @@ javascript:(function(){
     return count;
   }
 
-  /* Safe URI sanitizer ensuring sid query parameter slashes are encoded as %2F */
+  /* Safe URI sanitizer */
   function sanitizePageUri(uri) {
     if (!uri) return "";
     var u = uri.startsWith("http") ? uri.replace(/^https?:\/\/[^\/]+/, "") : uri;
@@ -1171,7 +1982,7 @@ javascript:(function(){
     });
   }
 
-  /* Get user agent header with required mobile token for Rome API WAF */
+  /* Get user agent header */
   function getXUserAgent() {
     var ua = navigator.userAgent || "";
     if (ua.includes("FKUA/msite")) return ua;
@@ -1202,7 +2013,7 @@ javascript:(function(){
     return 560032;
   }
 
-  /* Extract active session & query context for Rome API */
+  /* Extract active session context */
   function getRequestContext() {
     var ctx = { type: "BROWSE_PAGE" };
     try {
@@ -1218,7 +2029,7 @@ javascript:(function(){
     return ctx;
   }
 
-  /* Fetch page data using Flipkart Rome API with automatic 302 redirection resolution */
+  /* Fetch page data using Rome API */
   async function fetchRomePage(pageUri, redirectCount) {
     if (!pageUri) return null;
     redirectCount = redirectCount || 0;
@@ -1259,7 +2070,6 @@ javascript:(function(){
       });
       if (resp.ok) {
         var json = await resp.json();
-        /* Handle internal 302 redirection (e.g. to /hyperlocal-preview-page) */
         var slots = json.RESPONSE?.slots || json.slots || [];
         var redir = json.RESPONSE?.pageMeta?.redirectionObject || json.pageMeta?.redirectionObject;
         if ((!slots || slots.length === 0) && redir && redir.url) {
@@ -1317,21 +2127,17 @@ javascript:(function(){
     }
   }
 
-  /* Parse products from raw HTML text (via __INITIAL_STATE__ + DOMParser) */
+  /* Parse products from raw HTML text */
   function parseHtmlString(html) {
     var count = 0;
     if (!html) return 0;
-
-    /* 1. Extract window.__INITIAL_STATE__ safely */
     try {
       var json = extractStateJsonFromHtml(html);
       if (json) {
-        var pData = json.multiWidgetState?.pageDataResponse || json.multiWidgetState || json.pageDataResponse || json;
-        count += parseProducts(pData);
+        count += parseProducts(json);
       }
     } catch(e) {}
 
-    /* 2. Also parse DOM with DOMParser as guaranteed fallback */
     try {
       var parser = new DOMParser();
       var doc = parser.parseFromString(html, "text/html");
@@ -1341,126 +2147,25 @@ javascript:(function(){
     return count;
   }
 
-  /* Unified page fetcher: Attempts Rome API first, with fallback to HTML if needed */
+  /* Unified page fetcher */
   async function fetchAndParsePage(uri) {
     if (!uri) return { count: 0 };
-    var json = await fetchRomePage(uri);
-    if (json) {
-      var c = parseProducts(json);
-      if (c > 0) return { count: c, json: json };
-    }
-    /* Fallback to HTML if API returned 0 deals */
+    // 1. HTML-first: Same-origin GET with session cookies (100% reliable, zero 403 errors)
     var html = await fetchCategoryHtml(uri);
     if (html) {
-      var c2 = parseHtmlString(html);
-      return { count: c2, html: html, json: json };
+      var c = parseHtmlString(html);
+      if (c > 0) return { count: c, html: html };
     }
-    return { count: 0, json: json };
+    // 2. Fallback: If HTML fetch returned 0 items, try Rome API
+    var json = await fetchRomePage(uri);
+    if (json) {
+      var c2 = parseProducts(json);
+      if (c2 > 0) return { count: c2, json: json };
+    }
+    return { count: 0 };
   }
 
-  /* Extract subcategory links from Rome API JSON slots */
-  function extractSubcategoriesFromJson(json) {
-    var subcats = [];
-    var seen = new Set();
-    if (!json) return subcats;
-    var slots = json.RESPONSE?.slots || json.slots || json.pageData?.slots || json.multiWidgetState?.widgetsData?.slots || json.multiWidgetState?.pageDataResponse?.slots || [];
-    slots.forEach(function(s){
-      var w = s.widget || {};
-      var wdata = w.data || {};
-
-      /* Format 1: STICKY_NAVIGATION_CARD_WIDGET */
-      if (w.type === "STICKY_NAVIGATION_CARD_WIDGET" || w.viewType === "CATEGORY_FILTER_VIEW") {
-        var comps = wdata.renderableComponents || [];
-        comps.forEach(function(c){
-          var url = c.action?.url || c.action?.originalUrl || "";
-          var title = c.value?.contentTitle?.text || c.action?.tracking?.contentTitle || "";
-          if (url) {
-            var sUrl = sanitizePageUri(url);
-            if (!seen.has(sUrl)) {
-              seen.add(sUrl);
-              subcats.push({ title: title.trim() || "Subcategory", url: sUrl });
-            }
-          }
-        });
-      }
-
-      /* Format 2: ATLAS_WIDGET with vertical-sticky-navigation-side-rail */
-      if (w.viewType === "vertical-sticky-navigation-side-rail" || w.widgetName?.includes("CATEGORY_FILTER_VIEW") || w.widgetType?.includes("CATEGORY_FILTER_VIEW")) {
-        var dls = wdata.dlsData || {};
-        for (var k in dls) {
-          if (k.indexOf("scrollToListData") !== -1 || k.indexOf("scroll") !== -1 || k.indexOf("horizontalListData") !== -1) {
-            var list = dls[k]?.value || [];
-            if (Array.isArray(list)) {
-              list.forEach(function(card){
-                var cval = card?.value || {};
-                var action = cval.SelectionViewData_0?.action || cval.row_0?.action || cval.col_0?.action || {};
-                var url = action.url || action.originalUrl || "";
-                var title = cval.label_0?.value?.text || cval.trackerData_0?.tracking?.contentTitle || cval.trackerData_0?.tracking?.widgetContent || "";
-                if (url) {
-                  var sUrl = sanitizePageUri(url);
-                  if (!seen.has(sUrl)) {
-                    seen.add(sUrl);
-                    subcats.push({ title: title.trim() || "Subcategory", url: sUrl });
-                  }
-                }
-              });
-            }
-          }
-        }
-      }
-    });
-    return subcats;
-  }
-
-  /* Extract subcategory links from category HTML (via __INITIAL_STATE__ + DOMParser + Regex) */
-  function extractSubcategoriesFromHtml(html) {
-    var subcats = [];
-    var seen = new Set();
-    if (!html) return subcats;
-
-    /* A. Search inside window.__INITIAL_STATE__ JSON for navigation widgets */
-    try {
-      var json = extractStateJsonFromHtml(html);
-      if (json) {
-        var pData = json.multiWidgetState?.pageDataResponse || json.multiWidgetState || json.pageDataResponse || json;
-        subcats = extractSubcategoriesFromJson(pData);
-        if (subcats.length > 0) return subcats;
-      }
-    } catch(e) {}
-
-    /* B. Search via DOMParser */
-    try {
-      var parser = new DOMParser();
-      var doc = parser.parseFromString(html, "text/html");
-      doc.querySelectorAll('a[href*="/hyperlocal/hloc/"], a[href*="sid=hloc"]').forEach(function(a){
-        var href = a.getAttribute("href") || "";
-        var title = a.innerText.trim();
-        if (href && title && href.includes("/pr?")) {
-          var sUrl = sanitizePageUri(href);
-          if (!seen.has(sUrl)) {
-            seen.add(sUrl);
-            subcats.push({ title: title, url: sUrl });
-          }
-        }
-      });
-    } catch(e) {}
-
-    /* C. Search via Regex for subcategory patterns */
-    try {
-      var urlMatches = html.matchAll(/\/hyperlocal\/hloc\/[a-z0-9]+\/pr\?sid=[^"&'\s]+/gi);
-      for (var match of urlMatches) {
-        var u = sanitizePageUri(match[0]);
-        if (!seen.has(u)) {
-          seen.add(u);
-          subcats.push({ title: "Subcategory", url: u });
-        }
-      }
-    } catch(e) {}
-
-    return subcats;
-  }
-
-  /* Search Flipkart Minutes via Rome API */
+  /* Search Flipkart Minutes via unified fetcher */
   async function startSearch(query) {
     if (!query || !query.trim()) {
       setStatus("Enter search keyword");
@@ -1472,7 +2177,9 @@ javascript:(function(){
     st.mode = "RUN";
     if (btnSearch) {
       btnSearch.textContent = "Stop ⏹";
-      btnSearch.className = "fkd-pill fkd-pill-danger";
+      btnSearch.className = "fkd-btn-search";
+      btnSearch.style.background = "#F24822";
+      btnSearch.style.borderColor = "#F24822";
     }
 
     st.items = [];
@@ -1486,7 +2193,6 @@ javascript:(function(){
     await fetchAndParsePage(searchUri);
     renderGrid();
 
-    /* Try Page 2 if still running and found items */
     if (st.mode === "RUN" && !window.fkDealsStop && st.items.length > 0) {
       setStatus(`Loading more "${query}"...`);
       var p2Uri = searchUri + "&page=2";
@@ -1499,88 +2205,95 @@ javascript:(function(){
     setStatus(`Search done! ${st.items.length} items (${finalIn} in stock)`);
   }
 
-  /* Main Category & Subcategory Looping Engine (ZERO AUTO-SCROLL) */
-  async function startCategoryFetch() {
+  /* Master Scan: Sequentially fetch Page 1 across all clean main category groups */
+  async function startAllCategoriesFetch() {
     closeCatDrawer();
+    st.searchQuery = "";
+    if (inputSearch) inputSearch.value = "";
     window.fkDealsStop = false;
     st.mode = "RUN";
     btnFetch.textContent = "Stop ⏹";
     btnFetch.className = "fkd-pill fkd-pill-danger";
 
-    /* 1. Clear items on new fetch so we don't display items from previous page */
     st.items = [];
     st.seen.clear();
     renderGrid();
 
-    var targetUri = st.selectedMode;
-    var catId = st.selectedCatId;
+    setStatus(`Scanning ${MAIN_GROUPS.length} verified categories...`);
 
-    /* Mode: Selected Category */
-    setStatus("Loading category deals...");
-
-    /* 2. Check pre-mapped subcategories first */
-    var subcategories = [];
-    if (PRESET_SUBCATS[catId]) {
-      subcategories = PRESET_SUBCATS[catId].slice();
-    }
-
-    /* 3. If not pre-mapped, fetch category page to discover subcategories and parse Page 1 deals */
-    if (!subcategories.length) {
-      setStatus("Discovering deals & subcategories...");
-      var p1Uri = targetUri + (targetUri.includes("?") ? "&" : "?") + "sort=discount";
-      var pageRes = await fetchAndParsePage(p1Uri);
+    for (var i = 0; i < MAIN_GROUPS.length; i++) {
+      if (st.mode !== "RUN" || window.fkDealsStop) break;
+      var grp = MAIN_GROUPS[i];
+      setStatus(`[${i+1}/${MAIN_GROUPS.length}] ${grp.name.trim()}...`);
+      var pUri = grp.uri;
+      if (!pUri.includes("sort=discount")) {
+        pUri += (pUri.includes("?") ? "&" : "?") + "sort=discount";
+      }
+      var res = await fetchAndParsePage(pUri);
       renderGrid();
-      if (pageRes.json) {
-        subcategories = extractSubcategoriesFromJson(pageRes.json);
-      }
-      if (!subcategories.length && pageRes.html) {
-        subcategories = extractSubcategoriesFromHtml(pageRes.html);
-      }
-    }
 
-    /* 4. If subcategories available, loop Page 1 for each */
-    if (subcategories.length > 0) {
-      setStatus(`Scanning ${subcategories.length} subcategories...`);
-      for (var idx = 0; idx < subcategories.length; idx++) {
-        if (st.mode !== "RUN" || window.fkDealsStop) break;
-        var sub = subcategories[idx];
-        var subUri = sub.url;
-        if (!subUri.includes("sort=discount")) {
-          subUri += (subUri.includes("?") ? "&" : "?") + "sort=discount";
-        }
-        setStatus(`[${idx+1}/${subcategories.length}] ${sub.title}...`);
-        await fetchAndParsePage(subUri);
-        renderGrid();
-        await new Promise(function(r){ setTimeout(r, 350); });
-      }
-    }
-
-    /* 5. Multi-page: If no subcategories exist OR subcategories yielded 0 items, fetch pages of targetUri */
-    if (st.items.length === 0 || subcategories.length === 0) {
-      if (PRESET_SUBCATS[catId]) {
-        setStatus("Fetching category deals...");
-        var p1 = targetUri + (targetUri.includes("?") ? "&" : "?") + "sort=discount";
-        await fetchAndParsePage(p1);
+      /* If Page 1 has top deals (>=45%), fetch Page 2 as well */
+      if (st.mode === "RUN" && !window.fkDealsStop && res && res.count >= 8 && st.items.some(function(x){ return x.d >= 45; })) {
+        var p2Uri = pUri + (pUri.includes("?") ? "&" : "?") + "page=2&sort=discount";
+        await fetchAndParsePage(p2Uri);
         renderGrid();
       }
-
-      var pageNum = 2;
-      while (st.mode === "RUN" && !window.fkDealsStop && pageNum <= 4) {
-        setStatus(`Fetching Page ${pageNum} deals...`);
-        var pUri = targetUri + (targetUri.includes("?") ? "&" : "?") + "sort=discount&page=" + pageNum;
-        var pRes = await fetchAndParsePage(pUri);
-        renderGrid();
-        if (!pRes.count && !pRes.json?.RESPONSE?.pageData?.hasMorePages) break;
-        pageNum++;
-        await new Promise(function(r){ setTimeout(r, 350); });
-      }
+      await new Promise(function(r){ setTimeout(r, 280); });
     }
 
     stopAll();
     var finalIn = st.items.filter(function(x){ return !x.oos; }).length;
-    setStatus(`Done! Found ${st.items.length} (${finalIn} in stock)`);
+    setStatus(`Done! Found ${st.items.length} top deals (${finalIn} in stock)`);
+  }
+
+  /* Fetch specific Category or Subcategory */
+  async function startCategoryFetch() {
+    closeCatDrawer();
+    st.searchQuery = "";
+    if (inputSearch) inputSearch.value = "";
+    window.fkDealsStop = false;
+    st.mode = "RUN";
+    btnFetch.textContent = "Stop ⏹";
+    btnFetch.className = "fkd-pill fkd-pill-danger";
+
+    st.items = [];
+    st.seen.clear();
+    renderGrid();
+
+    var item = st.selectedItem;
+    var targetUri = item ? item.uri : "";
+    if (!targetUri) {
+      startAllCategoriesFetch();
+      return;
+    }
+
+    var label = st.selectedLabel || item.name || "Category";
+    setStatus(`Fetching ${label.trim()}...`);
+    var p1Uri = targetUri;
+    if (!p1Uri.includes("sort=discount")) {
+      p1Uri += (p1Uri.includes("?") ? "&" : "?") + "sort=discount";
+    }
+    var res1 = await fetchAndParsePage(p1Uri);
+    renderGrid();
+
+    /* Multi-page fetching: fetch Page 2 and 3 if high deals present */
+    var pageNum = 2;
+    while (st.mode === "RUN" && !window.fkDealsStop && pageNum <= 3) {
+      if (res1 && res1.count < 6) break;
+      setStatus(`Fetching ${label.trim()} Page ${pageNum}...`);
+      var pUri = targetUri + (targetUri.includes("?") ? "&" : "?") + "page=" + pageNum + "&sort=discount";
+      var pRes = await fetchAndParsePage(pUri);
+      renderGrid();
+      if (!pRes.count) break;
+      pageNum++;
+      await new Promise(function(r){ setTimeout(r, 300); });
+    }
+
+    stopAll();
+    var finalIn = st.items.filter(function(x){ return !x.oos; }).length;
+    setStatus(`Done! Found ${st.items.length} items (${finalIn} in stock)`);
   }
 
   /* Initialize */
-  setStatus("Ready - Select a category or search");
+  setStatus("Ready - Click Fetch ⚡ or select category");
 })();

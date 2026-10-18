@@ -1,9 +1,0 @@
-.DS_Store
-Thumbs.db
-*.log
-.vscode/
-.idea/
-__pycache__/
-*.pyc
-scratch/
-
