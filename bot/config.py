@@ -150,4 +150,3 @@ CATEGORIES = [
         "uri": "/grocery/office-school-supplies/pr?marketplace=HYPERLOCAL&sort=discount&sid=73z,pyy&p[]=facets.category[]=73z&p[]=facets.category[]=73z/pyy/"
     }
 ]
-
