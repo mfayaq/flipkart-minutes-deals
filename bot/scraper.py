@@ -582,4 +582,3 @@ class FlipkartScraper:
         for p in products:
             p["category"] = cat_name
         return products, discovered_subcats
-
