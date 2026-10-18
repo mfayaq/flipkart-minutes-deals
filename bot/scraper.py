@@ -110,6 +110,7 @@ class FlipkartScraper:
     def fetch_rome_page(self, page_uri, redirect_count=0):
         """Fetches a page from Rome API, automatically following 302 redirects."""
         if redirect_count > 3:
+            print("    [diag] redirect depth >3, giving up")
             return None
 
         clean_uri = sanitize_page_uri(page_uri)
@@ -148,6 +149,7 @@ class FlipkartScraper:
         try:
             with urllib.request.urlopen(req, context=ctx, timeout=12) as res:
                 if res.status != 200:
+                    print(f"    [diag] HTTP {res.status} from Rome API, skipping page")
                     return None
                 data = res.read().decode("utf-8")
                 parsed_json = json.loads(data)
@@ -164,6 +166,18 @@ class FlipkartScraper:
                 redir = parsed_json.get("RESPONSE", {}).get("pageMeta", {}).get("redirectionObject", {})
                 redir_url = redir.get("url")
 
+                # [diag] Redacted fetch diagnostics: status/slot/page summary only.
+                # No URIs with query values, headers, cookies, tokens, or location data.
+                page_data = parsed_json.get("RESPONSE", {}).get("pageData", {})
+                redir_path = urllib.parse.urlparse(redir_url).path if redir_url else None
+                print(f"    [diag] http={res.status} api={parsed_json.get('STATUS_CODE')} slots={len(slots)} pageId={page_data.get('pageId')} title={page_data.get('pageTitle')!r} redirect={redir_path}")
+                if slots:
+                    widget_types = {}
+                    for slot in slots:
+                        wtype = (slot.get("widget") or {}).get("type")
+                        widget_types[wtype] = widget_types.get(wtype, 0) + 1
+                    print(f"    [diag] widget types: {widget_types}")
+
                 if (not slots or len(slots) == 0) and redir_url:
                     redir_parsed = urllib.parse.urlparse(redir_url)
                     target_path = redir_parsed.path + ("?" + redir_parsed.query if redir_parsed.query else "")
@@ -171,7 +185,8 @@ class FlipkartScraper:
                         return self.fetch_rome_page(target_path, redirect_count + 1)
 
                 return parsed_json
-        except Exception:
+        except Exception as e:
+            print(f"    [diag] fetch failed: {type(e).__name__}")
             return None
 
     def parse_products_from_json(self, json_data):
