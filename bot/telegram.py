@@ -107,4 +107,3 @@ class TelegramNotifier:
         except Exception as e:
             print(f"[Telegram Error] {e}")
             return False
-
